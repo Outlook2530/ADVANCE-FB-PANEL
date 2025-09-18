@@ -1,0 +1,22 @@
+# render.yaml
+services:
+  - type: web
+    name: advance-fb-panel
+    env: python
+    plan: free
+    region: singapore
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.4
+      - key: FLASK_APP
+        value: app.py
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000
+
+    # Auto-deploy settings
+    autoDeploy: true
+    branch: main
